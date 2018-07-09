@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  
+  <title>Electric Flowmap</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3/dist/leaflet.css">
+<link rel="icon" type="image/png" href="https://cdn.icon-icons.com/icons2/1459/PNG/512/2799205-creative-idea-light_99776.png" />
+<script src="libs/leaflet/leaflet-src.js"></script>
+<script src="dist/L.LabelTextCollision.js"></script>
+
+
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    } 
+
+  </style>
+</head>
+<body>
+     
+  <div id="map" style="width: 100%; height: 100%"></div>
+
+  <!-- load Esri Leaflet because we want to use an Esri basemap -->
+  <script src="https://unpkg.com/esri-leaflet@2.1/dist/esri-leaflet.js"></script>
+
+  <!-- load animation tweening lib requirement for CanvasFlowMapLayer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+
+  <!-- then load CanvasFlowMapLayer -->
+  <script src="../../src/CanvasFlowmapLayer.js"></script>
+
+  <!-- also load 3rd-party CSV parsing libary just for this demo  -->
+  <script src="https://unpkg.com/papaparse@4.3/papaparse.min.js"></script>
+
+
+    <script>
+        
+        var osmUrl = 'https://unpkg.com/leaflet@1.3/dist/leaflet.css'    
+        var osmAttrib = 'Map data  <a href="https://unpkg.com/leaflet@1.3/dist/leaflet.css">OpenStreetMap</a> contributors';
+        var osm = new L.TileLayer(
+            osmUrl, {
+            maxZoom : 18,
+            attribution : osmAttrib
+            });
+        var labelTextCollision = new L.LabelTextCollision({
+            collisionFlg : true
+            });
+        var map = new L.Map('map', {
+            layers : [ osm ],
+            center : new L.LatLng(13.973611, 100.571667),
+            zoom : 6,
+            renderer : labelTextCollision
+            });
+
+
+        var p = L.polyline( [ [ 15.807220 , 104.635278 ], [ 15.807220 , 104.635278 ], [ 15.807220 , 104.635278 ] ], { weight : 0.5, color : '#fe57a1', text : 'AMNAT CHAROEN' }).addTo(map);
+        var p = L.polyline( [ [ 14.578889 , 100.469722 ], [ 14.578889 , 100.469722 ], [ 14.578889 , 100.469722 ] ], { weight : 0.5, color : '#fe57a1', text : 'ANG THONG 1'  }).addTo(map)
+        var p = L.polyline( [ [ 14.609722 , 100.348333 ], [ 14.609722 , 100.348333 ], [ 14.609722 , 100.348333 ] ], { weight : 0.5, color : '#fe57a1', text : 'ANG THONG 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.125556 , 100.929722 ], [ 13.125556 , 100.929722 ], [ 13.125556 , 100.929722 ] ], { weight : 0.5, color : '#fe57a1', text : 'AO PHAI' }).addTo(map)
+        var p = L.polyline( [ [ 14.362778 , 100.556111 ], [ 14.362778 , 100.556111 ], [ 14.362778 , 100.556111 ] ], { weight : 0.5, color : '#fe57a1', text : 'AYUTTHAYA 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.380556 , 100.606944 ], [ 14.380556 , 100.606944 ], [ 14.380556 , 100.606944 ] ], { weight : 0.5, color : '#fe57a1', text : 'AYUTTHAYA 2'  }).addTo(map)
+        var p = L.polyline( [ [ 15.462500 , 101.731111 ], [ 15.462500 , 101.731111 ], [ 15.462500 , 101.731111 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAMNET NARONG'  }).addTo(map)
+        var p = L.polyline( [ [ 13.216667 , 101.226111 ], [ 13.216667 , 101.226111 ], [ 13.216667 , 101.226111 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAN BUNG' }).addTo(map)
+        var p = L.polyline( [ [ 17.684722 , 103.202500 ], [ 17.684722 , 103.202500 ], [ 17.684722 , 103.202500 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAN BUNG' }).addTo(map)
+        var p = L.polyline( [ [ 16.078611 , 102.728056 ], [ 16.078611 , 102.728056 ], [ 16.078611 , 102.728056 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAN PHAI' }).addTo(map)
+        var p = L.polyline( [ [ 13.789167 , 99.9622220 ], [ 13.789167 , 99.9622220 ], [ 13.789167 , 99.9622220 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAN PONG 1' }).addTo(map)
+        var p = L.polyline( [ [ 13.850556 , 99.8730560 ], [ 13.850556 , 99.8730560 ], [ 13.850556 , 99.8730560 ] ], { weight : 0.5, color : '#fe57a1', text : 'BAN PONG 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.740556 , 100.604722 ], [ 13.740556 , 100.604722 ], [ 13.740556 , 100.604722 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG KAPI' }).addTo(map)
+        var p = L.polyline( [ [ 12.937500 , 100.928056 ], [ 12.937500 , 100.928056 ], [ 12.937500 , 100.928056 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG LAMUNG' }).addTo(map)
+        var p = L.polyline( [ [ 16.023889 , 100.395278 ], [ 16.023889 , 100.395278 ], [ 16.023889 , 100.395278 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG MUN NAK' }).addTo(map)
+        var p = L.polyline( [ [ 14.210833 , 100.590000 ], [ 14.210833 , 100.590000 ], [ 14.210833 , 100.590000 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG PA-IN 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.196111 , 100.613611 ], [ 14.196111 , 100.613611 ], [ 14.196111 , 100.613611 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG PA-IN 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.501111 , 101.028611 ], [ 13.501111 , 101.028611 ], [ 13.501111 , 101.028611 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG PAKONG' }).addTo(map)
+        var p = L.polyline( [ [ 13.638889 , 100.693056 ], [ 13.638889 , 100.693056 ], [ 13.638889 , 100.693056 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG PHLI' }).addTo(map)
+        var p = L.polyline( [ [ 11.403333 , 99.5105560 ], [ 11.403333 , 99.5105560 ], [ 11.403333 , 99.5105560 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG SAPHAN 1' }).addTo(map)
+        var p = L.polyline( [ [ 11.420000 , 99.5183330 ], [ 11.420000 , 99.5183330 ], [ 11.420000 , 99.5183330 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANG SAPHAN 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.708056 , 100.394167 ], [ 13.708056 , 100.394167 ], [ 13.708056 , 100.394167 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANGKOK NOI' }).addTo(map)
+        var p = L.polyline( [ [ 12.784444 , 101.252500 ], [ 12.784444 , 101.252500 ], [ 12.784444 , 101.252500 ] ], { weight : 0.5, color : '#fe57a1', text : 'BANKHAI' }).addTo(map)
+        var p = L.polyline( [ [ 17.238611 , 98.9908330 ], [ 17.238611 , 98.9908330 ], [ 17.238611 , 98.9908330 ] ], { weight : 0.5, color : '#fe57a1', text : 'BHUMIBOL'}).addTo(map)
+        var p = L.polyline( [ [ 13.074167 , 101.076111 ], [ 13.074167 , 101.076111 ], [ 13.074167 , 101.076111 ] ], { weight : 0.5, color : '#fe57a1', text : 'BO WIN'}).addTo(map)
+        var p = L.polyline( [ [ 18.316667 , 103.639444 ], [ 18.316667 , 103.639444 ], [ 18.316667 , 103.639444 ] ], { weight : 0.5, color : '#fe57a1', text : 'BUNG KAN' }).addTo(map)
+        var p = L.polyline( [ [ 15.829722 , 100.996111 ], [ 15.829722 , 100.996111 ], [ 15.829722 , 100.996111 ] ], { weight : 0.5, color : '#fe57a1', text : 'BUNG SAM PHAN' }).addTo(map)
+        var p = L.polyline( [ [ 15.022500 , 103.110556 ], [ 15.022500 , 103.110556 ], [ 15.022500 , 103.110556 ] ], { weight : 0.5, color : '#fe57a1', text : 'BURI RAM' }).addTo(map)
+        var p = L.polyline( [ [ 12.813889 , 99.9605560 ], [ 12.813889 , 99.9605560 ], [ 12.813889 , 99.9605560 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHA-AM' }).addTo(map)
+        var p = L.polyline( [ [ 13.623889 , 101.036667 ], [ 13.623889 , 101.036667 ], [ 13.623889 , 101.036667 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHACHOENGSAO' }).addTo(map)
+        var p = L.polyline( [ [ 13.907222 , 100.558611 ], [ 13.907222 , 100.558611 ], [ 13.907222 , 100.558611 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHAENG WATTHANA' }).addTo(map)
+        var p = L.polyline( [ [ 15.204444 , 101.107222 ], [ 15.204444 , 101.107222 ], [ 15.204444 , 101.107222 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHAI BADAN' }).addTo(map)
+        var p = L.polyline( [ [ 15.826667 , 102.092222 ], [ 15.826667 , 102.092222 ], [ 15.826667 , 102.092222 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHAIYAPHUM' }).addTo(map)
+        var p = L.polyline( [ [ 12.663889 , 102.120000 ], [ 12.663889 , 102.120000 ], [ 12.663889 , 102.120000 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHANTHABURI' }).addTo(map)
+        var p = L.polyline( [ [ 18.766944 , 99.0111110 ], [ 18.766944 , 99.0111110 ], [ 18.766944 , 99.0111110 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHIANG MAI 1' }).addTo(map)
+        var p = L.polyline( [ [ 18.809722 , 99.0011110 ], [ 18.809722 , 99.0011110 ], [ 18.809722 , 99.0011110 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHIANG MAI 2' }).addTo(map)
+        var p = L.polyline( [ [ 18.716111 , 98.9455560 ], [ 18.716111 , 98.9455560 ], [ 18.716111 , 98.9455560 ] ], { weight : 0.5, color : '#fe57a1', text : 'BHUMIBOL' }).addTo(map)
+        var p = L.polyline( [ [ 19.850556 , 99.8577780 ], [ 19.850556 , 99.8577780 ], [ 19.850556 , 99.8577780 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHIANG RAI' }).addTo(map)
+        var p = L.polyline( [ [ 13.636944 , 99.6725000 ], [ 13.636944 , 99.6725000 ], [ 13.636944 , 99.6725000 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHOM BUNG' }).addTo(map)
+        var p = L.polyline( [ [ 12.857222 , 100.925000 ], [ 12.857222 , 100.925000 ], [ 12.857222 , 100.925000 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHOM THIEN' }).addTo(map)
+        var p = L.polyline( [ [ 18.437500 , 98.6925000 ], [ 18.437500 , 98.6925000 ], [ 18.437500 , 98.6925000 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHOM THONG' }).addTo(map)
+        var p = L.polyline( [ [ 13.337778 , 100.994722 ], [ 13.337778 , 100.994722 ], [ 13.337778 , 100.994722 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHON BURI' }).addTo(map)
+        var p = L.polyline( [ [ 16.535278 , 101.688889 ], [ 16.535278 , 101.688889 ], [ 16.535278 , 101.688889 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHULABHORN' }).addTo(map)
+        var p = L.polyline( [ [ 16.559167 , 102.067500 ], [ 16.559167 , 102.067500 ], [ 16.559167 , 102.067500 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHUM PHAE' }).addTo(map)
+        var p = L.polyline( [ [ 10.501667 , 99.1177780 ], [ 10.501667 , 99.1177780 ], [ 10.501667 , 99.1177780 ] ], { weight : 0.5, color : '#fe57a1', text : 'CHUM PHON' }).addTo(map)
+        var p = L.polyline( [ [ 14.801944 , 100.129167 ], [ 14.801944 , 100.129167 ], [ 14.801944 , 100.129167 ] ], { weight : 0.5, color : '#fe57a1', text : 'DOEBANG NANGBUAT' }).addTo(map)
+        var p = L.polyline( [ [ 6.9952780 , 100.433056 ], [ 6.9952780 , 100.433056 ], [ 6.9952780 , 100.433056 ] ], { weight : 0.5, color : '#fe57a1', text : 'HAT YAI 1' }).addTo(map)
+        var p = L.polyline( [ [ 6.9661110 , 100.491389 ], [ 6.9661110 , 100.491389 ], [ 6.9661110 , 100.491389 ] ], { weight : 0.5, color : '#fe57a1', text : 'HAT YAI 2' }).addTo(map)
+        var p = L.polyline( [ [ 12.568611 , 99.9219440 ], [ 12.568611 , 99.9219440 ], [ 12.568611 , 99.9219440 ] ], { weight : 0.5, color : '#fe57a1', text : 'HUA HIN' }).addTo(map)
+        var p = L.polyline( [ [ 12.914167 , 99.6338890 ], [ 12.914167 , 99.6338890 ], [ 12.914167 , 99.6338890 ] ], { weight : 0.5, color : '#fe57a1', text : 'KAENG KRACHAN' }).addTo(map)
+        var p = L.polyline( [ [ 16.378056 , 103.552500 ], [ 16.378056 , 103.552500 ], [ 16.378056 , 103.552500 ] ], { weight : 0.5, color : '#fe57a1', text : 'KALASIN' }).addTo(map)
+        var p = L.polyline( [ [ 13.986667 , 99.9980550 ], [ 13.986667 , 99.9980550 ], [ 13.986667 , 99.9980550 ] ], { weight : 0.5, color : '#fe57a1', text : 'KAMPHAENG SAEN' }).addTo(map)
+        var p = L.polyline( [ [ 16.504167 , 99.4875000 ], [ 16.504167 , 99.4875000 ], [ 16.504167 , 99.4875000 ] ], { weight : 0.5, color : '#fe57a1', text : 'KAMPHAENGPHET' }).addTo(map)
+        var p = L.polyline( [ [ 14.023333 , 99.5447220 ], [ 14.023333 , 99.5447220 ], [ 14.023333 , 99.5447220 ] ], { weight : 0.5, color : '#fe57a1', text : 'KANCHANABURI' }).addTo(map)
+        var p = L.polyline( [ [ 14.725556 , 104.666667 ], [ 14.725556 , 104.666667 ], [ 14.725556 , 104.666667 ] ], { weight : 0.5, color : '#fe57a1', text : 'KANTHARALAK' }).addTo(map)
+        var p = L.polyline( [ [ 9.2336110 , 99.8594440 ], [ 9.2336110 , 99.8594440 ], [ 9.2336110 , 99.8594440 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHANOM' }).addTo(map)
+        var p = L.polyline( [ [ 14.794167 , 98.6008330 ], [ 14.794167 , 98.6008330 ], [ 14.794167 , 98.6008330 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHAO LAEM' }).addTo(map)
+        var p = L.polyline( [ [ 13.571944 , 101.000000 ], [ 13.571944 , 101.000000 ], [ 13.571944 , 101.000000 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHLONG MAI' }).addTo(map)
+        var p = L.polyline( [ [ 6.7141670 , 100.452500 ], [ 6.7141670 , 100.452500 ], [ 6.7141670 , 100.452500 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHLONG NGAE' }).addTo(map)
+        var p = L.polyline( [ [ 16.410556 , 102.821389 ], [ 16.410556 , 102.821389 ], [ 16.410556 , 102.821389 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHON KAEN 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.416111 , 102.877222 ], [ 16.416111 , 102.877222 ], [ 16.416111 , 102.877222 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHON KAEN 2' }).addTo(map)
+        var p = L.polyline( [ [ 16.411944 , 102.751389 ], [ 16.411944 , 102.751389 ], [ 16.411944 , 102.751389 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHON KAEN 3' }).addTo(map)
+        var p = L.polyline( [ [ 16.464167 , 102.811389 ], [ 16.464167 , 102.811389 ], [ 16.464167 , 102.811389 ] ], { weight : 0.5, color : '#fe57a1', text : 'KHON KAEN UNIVERSITY' }).addTo(map)
+        var p = L.polyline( [ [ 12.805833 , 101.670556 ], [ 12.805833 , 101.670556 ], [ 12.805833 , 101.670556 ] ], { weight : 0.5, color : '#fe57a1', text : 'KLAENG' }).addTo(map)
+        var p = L.polyline( [ [ 15.296667 , 102.420833 ], [ 15.296667 , 102.420833 ], [ 15.296667 , 102.420833 ] ], { weight : 0.5, color : '#fe57a1', text : 'KONG' }).addTo(map)
+        var p = L.polyline( [ [ 7.9927780 , 99.0516670 ], [ 7.9927780 , 99.0516670 ], [ 7.9927780 , 99.0516670 ] ], { weight : 0.5, color : '#fe57a1', text : 'KRABI' }).addTo(map)
+        var p = L.polyline( [ [ 14.831111 , 101.569444 ], [ 14.831111 , 101.569444 ], [ 14.831111 , 101.569444 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAM TAKHONG' }).addTo(map)
+        var p = L.polyline( [ [ 18.247500 , 99.4550000 ], [ 18.247500 , 99.4550000 ], [ 18.247500 , 99.4550000 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAMPANG 1' }).addTo(map)
+        var p = L.polyline( [ [ 18.357222 , 99.5722220 ], [ 18.357222 , 99.5722220 ], [ 18.357222 , 99.5722220 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAMPANG 2' }).addTo(map)
+        var p = L.polyline( [ [ 18.631389 , 99.0436110 ], [ 18.631389 , 99.0436110 ], [ 18.631389 , 99.0436110 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAMPHUN 1' }).addTo(map)
+        var p = L.polyline( [ [ 18.651389 , 99.0558330 ], [ 18.651389 , 99.0558330 ], [ 18.651389 , 99.0558330 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAMPHUN 2' }).addTo(map)
+        var p = L.polyline( [ [ 7.6919440 , 99.5911110 ], [ 7.6919440 , 99.5911110 ], [ 7.6919440 , 99.5911110 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAMPOORA' }).addTo(map)
+        var p = L.polyline( [ [ 16.629444 , 99.8766670 ], [ 16.629444 , 99.8766670 ], [ 16.629444 , 99.8766670 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAN KRABU' }).addTo(map)
+        var p = L.polyline( [ [ 10.015556 , 99.0650000 ], [ 10.015556 , 99.0650000 ], [ 10.015556 , 99.0650000 ] ], { weight : 0.5, color : '#fe57a1', text : 'LANG SUAN' }).addTo(map)
+        var p = L.polyline( [ [ 13.826111 , 100.556389 ], [ 13.826111 , 100.556389 ], [ 13.826111 , 100.556389 ] ], { weight : 0.5, color : '#fe57a1', text : 'LAT PHRAO' }).addTo(map)
+        var p = L.polyline( [ [ 17.402222 , 101.738889 ], [ 17.402222 , 101.738889 ], [ 17.402222 , 101.738889 ] ], { weight : 0.5, color : '#fe57a1', text : 'LOEI' }).addTo(map)
+        var p = L.polyline( [ [ 16.759722 , 101.224444 ], [ 16.759722 , 101.224444 ], [ 16.759722 , 101.224444 ] ], { weight : 0.5, color : '#fe57a1', text : 'LOM SAK' }).addTo(map)
+        var p = L.polyline( [ [ 14.790000 , 100.655000 ], [ 14.790000 , 100.655000 ], [ 14.790000 , 100.655000 ] ], { weight : 0.5, color : '#fe57a1', text : 'LOP BURI 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.847500 , 100.627222 ], [ 14.847500 , 100.627222 ], [ 14.847500 , 100.627222 ] ], { weight : 0.5, color : '#fe57a1', text : 'LOP BURI 2' }).addTo(map)
+        var p = L.polyline( [ [ 20.197778 , 99.9219440 ], [ 20.197778 , 99.9219440 ], [ 20.197778 , 99.9219440 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAE CHAN' }).addTo(map)
+        var p = L.polyline( [ [ 18.298611 , 99.7522220 ], [ 18.298611 , 99.7522220 ], [ 18.298611 , 99.7522220 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAE MOH 3' }).addTo(map)
+        var p = L.polyline( [ [ 18.315000 , 99.7280560 ], [ 18.315000 , 99.7280560 ], [ 18.315000 , 99.7280560 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAE MOH 2' }).addTo(map)
+        var p = L.polyline( [ [ 18.342778 , 99.7033330 ], [ 18.342778 , 99.7033330 ], [ 18.342778 , 99.7033330 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAE MOH MINE' }).addTo(map)
+        var p = L.polyline( [ [ 16.717222 , 98.6013890 ], [ 16.717222 , 98.6013890 ], [ 16.717222 , 98.6013890 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAE SOT' }).addTo(map)
+        var p = L.polyline( [ [ 16.180556 , 103.318333 ], [ 16.180556 , 103.318333 ], [ 16.180556 , 103.318333 ] ], { weight : 0.5, color : '#fe57a1', text : 'MAHA SARAKHAM' }).addTo(map)
+        var p = L.polyline( [ [ 15.298611 , 100.108056 ], [ 15.298611 , 100.108056 ], [ 15.298611 , 100.108056 ] ], { weight : 0.5, color : '#fe57a1', text : 'MANOROM' }).addTo(map)
+        var p = L.polyline( [ [ 16.541389 , 104.699722 ], [ 16.541389 , 104.699722 ], [ 16.541389 , 104.699722 ] ], { weight : 0.5, color : '#fe57a1', text : 'MUKDAHAN 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.608056 , 104.707778 ], [ 16.608056 , 104.707778 ], [ 16.608056 , 104.707778 ] ], { weight : 0.5, color : '#fe57a1', text : 'MUKDAHAN 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.748611 , 100.191944 ], [ 13.748611 , 100.191944 ], [ 13.748611 , 100.191944 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON CHAISI' }).addTo(map)
+        var p = L.polyline( [ [ 14.265000 , 101.699444 ], [ 14.265000 , 101.699444 ], [ 14.265000 , 101.699444 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON NAYOK' }).addTo(map)
+        var p = L.polyline( [ [ 17.382222 , 104.761667 ], [ 17.382222 , 104.761667 ], [ 17.382222 , 104.761667 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON PRANOM' }).addTo(map)
+        var p = L.polyline( [ [ 14.992778 , 102.105556 ], [ 14.992778 , 102.105556 ], [ 14.992778 , 102.105556 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON RATCHASIMA 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.949167 , 102.025278 ], [ 14.949167 , 102.025278 ], [ 14.949167 , 102.025278 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON RATCHASIMA 2' }).addTo(map)
+        var p = L.polyline( [ [ 8.3991670 , 99.9661110 ], [ 8.3991670 , 99.9661110 ], [ 8.3991670 , 99.9661110 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON SI THAMMARAT' }).addTo(map)
+        var p = L.polyline( [ [ 15.705000 , 100.105556 ], [ 15.705000 , 100.105556 ], [ 15.705000 , 100.105556 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAKHON SAWAN' }).addTo(map)
+        var p = L.polyline( [ [ 16.673056 , 102.798056 ], [ 16.673056 , 102.798056 ], [ 16.673056 , 102.798056 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAM PHONG 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.679167 , 102.746667 ], [ 16.679167 , 102.746667 ], [ 16.679167 , 102.746667 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAM PHONG 2' }).addTo(map)
+        var p = L.polyline( [ [ 16.977222 , 103.975000 ], [ 16.977222 , 103.975000 ], [ 16.977222 , 103.975000 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAM PUNG' }).addTo(map)
+        var p = L.polyline( [ [ 16.973056 , 103.990000 ], [ 16.973056 , 103.990000 ], [ 16.973056 , 103.990000 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAM PUNG 69' }).addTo(map)
+        var p = L.polyline( [ [ 18.739444 , 100.758611 ], [ 18.739444 , 100.758611 ], [ 18.739444 , 100.758611 ] ], { weight : 0.5, color : '#fe57a1', text : 'NAN' }).addTo(map)
+        var p = L.polyline( [ [ 6.4200000 , 101.790000 ], [ 6.4200000 , 101.790000 ], [ 6.4200000 , 101.790000 ] ], { weight : 0.5, color : '#fe57a1', text : 'NARATHIWAT' }).addTo(map)
+        var p = L.polyline( [ [ 17.228611 , 102.407500 ], [ 17.228611 , 102.407500 ], [ 17.228611 , 102.407500 ] ], { weight : 0.5, color : '#fe57a1', text : 'NONG BUA LAM PHU' }).addTo(map)
+        var p = L.polyline( [ [ 13.808889 , 100.811111 ], [ 13.808889 , 100.811111 ], [ 13.808889 , 100.811111 ] ], { weight : 0.5, color : '#fe57a1', text : 'NONG CHOK' }).addTo(map)
+        var p = L.polyline( [ [ 17.358889 , 103.209444 ], [ 17.358889 , 103.209444 ], [ 17.358889 , 103.209444 ] ], { weight : 0.5, color : '#fe57a1', text : 'NONG HAN' }).addTo(map)
+        var p = L.polyline( [ [ 17.820556 , 102.760556 ], [ 17.820556 , 102.760556 ], [ 17.820556 , 102.760556 ] ], { weight : 0.5, color : '#fe57a1', text : 'NONG KHAI' }).addTo(map)
+        var p = L.polyline( [ [ 13.809722 , 100.515000 ], [ 13.809722 , 100.515000 ], [ 13.809722 , 100.515000 ] ], { weight : 0.5, color : '#fe57a1', text : 'NORTH BANGKOK' }).addTo(map)
+        var p = L.polyline( [ [ 13.723889 , 100.688056 ], [ 13.723889 , 100.688056 ], [ 13.723889 , 100.688056 ] ], { weight : 0.5, color : '#fe57a1', text : 'ON NUCH' }).addTo(map)
+        var p = L.polyline( [ [ 14.697500 , 101.450278 ], [ 14.697500 , 101.450278 ], [ 14.697500 , 101.450278 ] ], { weight : 0.5, color : '#fe57a1', text : 'PAK CHONG' }).addTo(map)
+        var p = L.polyline( [ [ 15.280556 , 105.468611 ], [ 15.280556 , 105.468611 ], [ 15.280556 , 105.468611 ] ], { weight : 0.5, color : '#fe57a1', text : 'PAK MUN' }).addTo(map)
+        var p = L.polyline( [ [ 6.8441670 , 101.266111 ], [ 6.8441670 , 101.266111 ], [ 6.8441670 , 101.266111 ] ], { weight : 0.5, color : '#fe57a1', text : 'PATTANI' }).addTo(map)
+        var p = L.polyline( [ [ 14.403056 , 100.782222 ], [ 14.403056 , 100.782222 ], [ 14.403056 , 100.782222 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHACHI' }).addTo(map)
+        var p = L.polyline( [ [ 17.367778 , 103.715833 ], [ 17.367778 , 103.715833 ], [ 17.367778 , 103.715833 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHANG KHON' }).addTo(map)
+        var p = L.polyline( [ [ 8.5169440 , 98.5155560 ], [ 8.5169440 , 98.5155560 ], [ 8.5169440 , 98.5155560 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHANGNGA' }).addTo(map)
+        var p = L.polyline( [ [ 7.5983330 , 100.028056 ], [ 7.5983330 , 100.028056 ], [ 7.5983330 , 100.028056 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHATTHALUNG' }).addTo(map)
+        var p = L.polyline( [ [ 15.549722 , 103.179444 ], [ 15.549722 , 103.179444 ], [ 15.549722 , 103.179444 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHAYAKKHAPHUM PHISAI' }).addTo(map)
+        var p = L.polyline( [ [ 19.214167 , 99.8719440 ], [ 19.214167 , 99.8719440 ], [ 19.214167 , 99.8719440 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHAYAO' }).addTo(map)
+        var p = L.polyline( [ [ 16.335833 , 101.088889 ], [ 16.335833 , 101.088889 ], [ 16.335833 , 101.088889 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHETCHABUN' }).addTo(map)
+        var p = L.polyline( [ [ 13.088889 , 99.9450000 ], [ 13.088889 , 99.9450000 ], [ 13.088889 , 99.9450000 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHETCHABURI' }).addTo(map)
+        var p = L.polyline( [ [ 16.460833 , 100.388333 ], [ 16.460833 , 100.388333 ], [ 16.460833 , 100.388333 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHICHIT' }).addTo(map)
+        var p = L.polyline( [ [ 16.835278 , 100.241667 ], [ 16.835278 , 100.241667 ], [ 16.835278 , 100.241667 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHITSANULOK 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.936389 , 100.159722 ], [ 16.936389 , 100.159722 ], [ 16.936389 , 100.159722 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHITSANULOK 2' }).addTo(map)
+        var p = L.polyline( [ [ 15.806389 , 102.581667 ], [ 15.806389 , 102.581667 ], [ 15.806389 , 102.581667 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHON' }).addTo(map)
+        var p = L.polyline( [ [ 16.294722 , 103.910556 ], [ 16.294722 , 103.910556 ], [ 16.294722 , 103.910556 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHON THONG' }).addTo(map)
+        var p = L.polyline( [ [ 14.750000 , 100.788611 ], [ 14.750000 , 100.788611 ], [ 14.750000 , 100.788611 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHRA PHUTTHABAT' }).addTo(map)
+        var p = L.polyline( [ [ 18.116111 , 100.143056 ], [ 18.116111 , 100.143056 ], [ 18.116111 , 100.143056 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHRAE' }).addTo(map)
+        var p = L.polyline( [ [ 7.9169440 , 98.3927780 ], [ 7.9169440 , 98.3927780 ], [ 7.9169440 , 98.3927780 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHUKET 1' }).addTo(map)
+        var p = L.polyline( [ [ 7.8597220 , 98.3425000 ], [ 7.8597220 , 98.3425000 ], [ 7.8597220 , 98.3425000 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHUKET 2' }).addTo(map)
+        var p = L.polyline( [ [ 9.0850000 , 99.2583330 ], [ 9.0850000 , 99.2583330 ], [ 9.0850000 , 99.2583330 ] ], { weight : 0.5, color : '#fe57a1', text : 'PHUNPHIN' }).addTo(map)
+        var p = L.polyline( [ [ 12.983611 , 101.195556 ], [ 12.983611 , 101.195556 ], [ 12.983611 , 101.195556 ] ], { weight : 0.5, color : '#fe57a1', text : 'PLUAK DAENG' }).addTo(map)
+        var p = L.polyline( [ [ 14.143611 , 101.321667 ], [ 14.143611 , 101.321667 ], [ 14.143611 , 101.321667 ] ], { weight : 0.5, color : '#fe57a1', text : 'PRACHIN BURI 1' }).addTo(map)
+        var p = L.polyline( [ [ 13.838611 , 101.548889 ], [ 13.838611 , 101.548889 ], [ 13.838611 , 101.548889 ] ], { weight : 0.5, color : '#fe57a1', text : 'PRACHIN BURI 2' }).addTo(map)
+        var p = L.polyline( [ [ 11.830833 , 99.7405560 ], [ 11.830833 , 99.7405560 ], [ 11.830833 , 99.7405560 ] ], { weight : 0.5, color : '#fe57a1', text : 'PRACHUAP KHIRI KHAN' }).addTo(map)
+        var p = L.polyline( [ [ 14.653611 , 102.393056 ], [ 14.653611 , 102.393056 ], [ 14.653611 , 102.393056 ] ], { weight : 0.5, color : '#fe57a1', text : 'PRAKHON CHAI' }).addTo(map)
+        var p = L.polyline( [ [ 12.356944 , 99.8877770 ], [ 12.356944 , 99.8877770 ], [ 12.356944 , 99.8877770 ] ], { weight : 0.5, color : '#fe57a1', text : 'PRAN BURI' }).addTo(map)
+        var p = L.polyline( [ [ 8.9686110 , 98.8072220 ], [ 8.9686110 , 98.8072220 ], [ 8.9686110 , 98.8072220 ] ], { weight : 0.5, color : '#fe57a1', text : 'RAJJAPRABHA' }).addTo(map)
+        var p = L.polyline( [ [ 13.973611 , 100.571667 ], [ 13.973611 , 100.571667 ], [ 13.973611 , 100.571667 ] ], { weight : 0.5, color : '#fe57a1', text : 'RANGSIT' }).addTo(map)
+        var p = L.polyline( [ [ 9.7422220 , 98.5944440 ], [ 9.7422220 , 98.5944440 ], [ 9.7422220 , 98.5944440 ] ], { weight : 0.5, color : '#fe57a1', text : 'RANONG' }).addTo(map)
+        var p = L.polyline( [ [ 7.8152780 , 100.356667 ], [ 7.8152780 , 100.356667 ], [ 7.8152780 , 100.356667 ] ], { weight : 0.5, color : '#fe57a1', text : 'RANOT' }).addTo(map)
+        var p = L.polyline( [ [ 13.527778 , 99.8030560 ], [ 13.527778 , 99.8030560 ], [ 13.527778 , 99.8030560 ] ], { weight : 0.5, color : '#fe57a1', text : 'RATCHABURI 1' }).addTo(map)
+        var p = L.polyline( [ [ 13.502778 , 99.7963890 ], [ 13.502778 , 99.7963890 ], [ 13.502778 , 99.7963890 ] ], { weight : 0.5, color : '#fe57a1', text : 'RATCHABURI 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.775833 , 100.586944 ], [ 13.775833 , 100.586944 ], [ 13.775833 , 100.586944 ] ], { weight : 0.5, color : '#fe57a1', text : 'RATCHADAPHISEK' }).addTo(map)
+        var p = L.polyline( [ [ 12.688056 , 101.276111 ], [ 12.688056 , 101.276111 ], [ 12.688056 , 101.276111 ] ], { weight : 0.5, color : '#fe57a1', text : 'RAYONG 1' }).addTo(map)
+        var p = L.polyline( [ [ 12.754444 , 101.164722 ], [ 12.754444 , 101.164722 ], [ 12.754444 , 101.164722 ] ], { weight : 0.5, color : '#fe57a1', text : 'RAYONG 2' }).addTo(map)
+        var p = L.polyline( [ [ 12.718889 , 101.141944 ], [ 12.718889 , 101.141944 ], [ 12.718889 , 101.141944 ] ], { weight : 0.5, color : '#fe57a1', text : 'RAYONG 3' }).addTo(map)
+        var p = L.polyline( [ [ 16.075556 , 103.651389 ], [ 16.075556 , 103.651389 ], [ 16.075556 , 103.651389 ] ], { weight : 0.5, color : '#fe57a1', text : 'ROIET 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.123889 , 103.515000 ], [ 16.123889 , 103.515000 ], [ 16.123889 , 103.515000 ] ], { weight : 0.5, color : '#fe57a1', text : 'ROIET 2' }).addTo(map)
+        var p = L.polyline( [ [ 6.6322220 , 100.402222 ], [ 6.6322220 , 100.402222 ], [ 6.6322220 , 100.402222 ] ], { weight : 0.5, color : '#fe57a1', text : 'SADAO' }).addTo(map)
+        var p = L.polyline( [ [ 13.970000 , 100.343056 ], [ 13.970000 , 100.343056 ], [ 13.970000 , 100.343056 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAI NOI' }).addTo(map)
+        var p = L.polyline( [ [ 17.142778 , 104.123611 ], [ 17.142778 , 104.123611 ], [ 17.142778 , 104.123611 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAKON NAKHON 1' }).addTo(map)
+        var p = L.polyline( [ [ 17.265556 , 104.121389 ], [ 17.265556 , 104.121389 ], [ 17.265556 , 104.121389 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAKON NAKHON 2' }).addTo(map)
+        var p = L.polyline( [ [ 15.980556 , 99.7925000 ], [ 15.980556 , 99.7925000 ], [ 15.980556 , 99.7925000 ] ], { weight : 0.5, color : '#fe57a1', text : 'SALOKBAT' }).addTo(map)
+        var p = L.polyline( [ [ 13.688333 , 100.295556 ], [ 13.688333 , 100.295556 ], [ 13.688333 , 100.295556 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMPHRAN 1' }).addTo(map)
+        var p = L.polyline( [ [ 13.730556 , 100.231667 ], [ 13.730556 , 100.231667 ], [ 13.730556 , 100.231667 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMPHRAN 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.592222 , 100.285278 ], [ 13.592222 , 100.285278 ], [ 13.592222 , 100.285278 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMUT SAKHON 1' }).addTo(map)
+        var p = L.polyline( [ [ 13.538611 , 100.233611 ], [ 13.538611 , 100.233611 ], [ 13.538611 , 100.233611 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMUT SAKHON 2' }).addTo(map)
+        var p = L.polyline( [ [ 13.594722 , 100.336111 ], [ 13.594722 , 100.336111 ], [ 13.594722 , 100.336111 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMUT SAKHON 3' }).addTo(map)
+        var p = L.polyline( [ [ 13.509722 , 100.134722 ], [ 13.509722 , 100.134722 ], [ 13.509722 , 100.134722 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMUT SAKHON 4' }).addTo(map)
+        var p = L.polyline( [ [ 13.442222 , 100.065278 ], [ 13.442222 , 100.065278 ], [ 13.442222 , 100.065278 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAMUT SONGKHRAM' }).addTo(map)
+        var p = L.polyline( [ [ 14.656389 , 103.817222 ], [ 14.656389 , 103.817222 ], [ 14.656389 , 103.817222 ] ], { weight : 0.5, color : '#fe57a1', text : 'SANG KA' }).addTo(map)
+        var p = L.polyline( [ [ 14.511667 , 100.918056 ], [ 14.511667 , 100.918056 ], [ 14.511667 , 100.918056 ] ], { weight : 0.5, color : '#fe57a1', text : 'SARABURI 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.612500 , 101.086111 ], [ 14.612500 , 101.086111 ], [ 14.612500 , 101.086111 ] ], { weight : 0.5, color : '#fe57a1', text : 'SARABURI 2' }).addTo(map)
+        var p = L.polyline( [ [ 14.637222 , 101.044167 ], [ 14.637222 , 101.044167 ], [ 14.637222 , 101.044167 ] ], { weight : 0.5, color : '#fe57a1', text : 'SARABURI 3' }).addTo(map)
+        var p = L.polyline( [ [ 14.406944 , 100.868611 ], [ 14.406944 , 100.868611 ], [ 14.406944 , 100.868611 ] ], { weight : 0.5, color : '#fe57a1', text : 'SARABURI 4' }).addTo(map)
+        var p = L.polyline( [ [ 6.6850000 , 100.071111 ], [ 6.6850000 , 100.071111 ], [ 6.6850000 , 100.071111 ] ], { weight : 0.5, color : '#fe57a1', text : 'SATUN' }).addTo(map)
+        var p = L.polyline( [ [ 12.750000 , 100.910833 ], [ 12.750000 , 100.910833 ], [ 12.750000 , 100.910833 ] ], { weight : 0.5, color : '#fe57a1', text : 'SATTAHIP 1' }).addTo(map)
+        var p = L.polyline( [ [ 12.666111 , 100.955556 ], [ 12.666111 , 100.955556 ], [ 12.666111 , 100.955556 ] ], { weight : 0.5, color : '#fe57a1', text : 'SATTAHIP 2' }).addTo(map)
+        var p = L.polyline( [ [ 17.338611 , 99.8988890 ], [ 17.338611 , 99.8988890 ], [ 17.338611 , 99.8988890 ] ], { weight : 0.5, color : '#fe57a1', text : 'SAWAN KHALOK' }).addTo(map)
+        var p = L.polyline( [ [ 13.928889 , 101.588333 ], [ 13.928889 , 101.588333 ], [ 13.928889 , 101.588333 ] ], { weight : 0.5, color : '#fe57a1', text : 'SI MAHAPHOT' }).addTo(map)
+        var p = L.polyline( [ [ 13.159444 , 100.945556 ], [ 13.159444 , 100.945556 ], [ 13.159444 , 100.945556 ] ], { weight : 0.5, color : '#fe57a1', text : 'SI RACHA' }).addTo(map)
+        var p = L.polyline( [ [ 15.071111 , 104.349444 ], [ 15.071111 , 104.349444 ], [ 15.071111 , 104.349444 ] ], { weight : 0.5, color : '#fe57a1', text : 'SI SA KET' }).addTo(map)
+        var p = L.polyline( [ [ 14.868333 , 101.775278 ], [ 14.868333 , 101.775278 ], [ 14.868333 , 101.775278 ] ], { weight : 0.5, color : '#fe57a1', text : 'SIKHIU' }).addTo(map)
+        var p = L.polyline( [ [ 14.874167 , 100.440556 ], [ 14.874167 , 100.440556 ], [ 14.874167 , 100.440556 ] ], { weight : 0.5, color : '#fe57a1', text : 'SING BURI' }).addTo(map)
+        var p = L.polyline( [ [ 17.759444 , 100.567500 ], [ 17.759444 , 100.567500 ], [ 17.759444 , 100.567500 ] ], { weight : 0.5, color : '#fe57a1', text : 'SIRIKIT' }).addTo(map)
+        var p = L.polyline( [ [ 15.204444 , 105.431667 ], [ 15.204444 , 105.431667 ], [ 15.204444 , 105.431667 ] ], { weight : 0.5, color : '#fe57a1', text : 'SIRINDHORN' }).addTo(map)
+        var p = L.polyline( [ [ 16.672778 , 103.735000 ], [ 16.672778 , 103.735000 ], [ 16.672778 , 103.735000 ] ], { weight : 0.5, color : '#fe57a1', text : 'SOMDET' }).addTo(map)
+        var p = L.polyline( [ [ 7.1161110 , 100.569167 ], [ 7.1161110 , 100.569167 ], [ 7.1161110 , 100.569167 ] ], { weight : 0.5, color : '#fe57a1', text : 'SONG KHLA' }).addTo(map)
+        var p = L.polyline( [ [ 7.1161110 , 100.569167 ], [ 7.1161110 , 100.569167 ], [ 7.1161110 , 100.569167 ] ], { weight : 0.5, color : '#fe57a1', text : 'SONG KHLA 2' }).addTo(map)
+        var p = L.polyline( [ [ 17.935278 , 99.3530560 ], [ 17.935278 , 99.3530560 ], [ 17.935278 , 99.3530560 ] ], { weight : 0.5, color : '#fe57a1', text : 'SOP PRAP' }).addTo(map)
+        var p = L.polyline( [ [ 13.618056 , 100.561111 ], [ 13.618056 , 100.561111 ], [ 13.618056 , 100.561111 ] ], { weight : 0.5, color : '#fe57a1', text : 'SOUTH BANGKOK' }).addTo(map)
+        var p = L.polyline( [ [ 13.651111 , 100.427222 ], [ 13.651111 , 100.427222 ], [ 13.651111 , 100.427222 ] ], { weight : 0.5, color : '#fe57a1', text : 'SOUTH THON BURI' }).addTo(map)
+        var p = L.polyline( [ [ 14.405833 , 99.1369440 ], [ 14.405833 , 99.1369440 ], [ 14.405833 , 99.1369440 ] ], { weight : 0.5, color : '#fe57a1', text : 'SRINAGARIND' }).addTo(map)
+        var p = L.polyline( [ [ 17.032778 , 99.8283330 ], [ 17.032778 , 99.8283330 ], [ 17.032778 , 99.8283330 ] ], { weight : 0.5, color : '#fe57a1', text : 'SUKHOTHAI' }).addTo(map)
+        var p = L.polyline( [ [ 6.0230560 , 101.915833 ], [ 6.0230560 , 101.915833 ], [ 6.0230560 , 101.915833 ] ], { weight : 0.5, color : '#fe57a1', text : 'SUNGAI KOLOK' }).addTo(map)
+        var p = L.polyline( [ [ 14.489167 , 100.133611 ], [ 14.489167 , 100.133611 ], [ 14.489167 , 100.133611 ] ], { weight : 0.5, color : '#fe57a1', text : 'SUPHAN BURI' }).addTo(map)
+        var p = L.polyline( [ [ 9.0725000 , 99.2238890 ], [ 9.0725000 , 99.2238890 ], [ 9.0725000 , 99.2238890 ] ], { weight : 0.5, color : '#fe57a1', text : 'SURAT THANI' }).addTo(map)
+        var p = L.polyline( [ [ 14.908611 , 103.511944 ], [ 14.908611 , 103.511944 ], [ 14.908611 , 103.511944 ] ], { weight : 0.5, color : '#fe57a1', text : 'SURIN' }).addTo(map)
+        var p = L.polyline( [ [ 14.576944 , 100.771944 ], [ 14.576944 , 100.771944 ], [ 14.576944 , 100.771944 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAHLAN 1' }).addTo(map)
+        var p = L.polyline( [ [ 14.578889 , 100.805278 ], [ 14.578889 , 100.805278 ], [ 14.578889 , 100.805278 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAHLAN 3' }).addTo(map)
+        var p = L.polyline( [ [ 16.882778 , 99.1350000 ], [ 16.882778 , 99.1350000 ], [ 16.882778 , 99.1350000 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAK 1' }).addTo(map)
+        var p = L.polyline( [ [ 16.807778 , 99.1444440 ], [ 16.807778 , 99.1444440 ], [ 16.807778 , 99.1444440 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAK 2' }).addTo(map)
+        var p = L.polyline( [ [ 15.247222 , 100.289444 ], [ 15.247222 , 100.289444 ], [ 15.247222 , 100.289444 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAKHLI' }).addTo(map)
+        var p = L.polyline( [ [ 8.8416670 , 98.3580560 ], [ 8.8416670 , 98.3580560 ], [ 8.8416670 , 98.3580560 ] ], { weight : 0.5, color : '#fe57a1', text : 'TAKUA PA' }).addTo(map)
+        var p = L.polyline( [ [ 13.974444 , 99.6313890 ], [ 13.974444 , 99.6313890 ], [ 13.974444 , 99.6313890 ] ], { weight : 0.5, color : '#fe57a1', text : 'THA MUANG' }).addTo(map)
+        var p = L.polyline( [ [ 15.602500 , 100.433889 ], [ 15.602500 , 100.433889 ], [ 15.602500 , 100.433889 ] ], { weight : 0.5, color : '#fe57a1', text : 'THA TAKO' }).addTo(map)
+        var p = L.polyline( [ [ 14.232778 , 99.2400000 ], [ 14.232778 , 99.2400000 ], [ 14.232778 , 99.2400000 ] ], { weight : 0.5, color : '#fe57a1', text : 'THA THUNG NA' }).addTo(map)
+        var p = L.polyline( [ [ 14.568611 , 100.761389 ], [ 14.568611 , 100.761389 ], [ 14.568611 , 100.761389 ] ], { weight : 0.5, color : '#fe57a1', text : 'THALAN 2' }).addTo(map)
+        var p = L.polyline( [ [ 16.930833 , 104.693611 ], [ 16.930833 , 104.693611 ], [ 16.930833 , 104.693611 ] ], { weight : 0.5, color : '#fe57a1', text : 'THAT PHANOM' }).addTo(map)
+        var p = L.polyline( [ [ 13.626389 , 100.665833 ], [ 13.626389 , 100.665833 ], [ 13.626389 , 100.665833 ] ], { weight : 0.5, color : '#fe57a1', text : 'THEPHARAK' }).addTo(map)
+        var p = L.polyline( [ [ 17.624167 , 99.2413890 ], [ 17.624167 , 99.2413890 ], [ 17.624167 , 99.2413890 ] ], { weight : 0.5, color : '#fe57a1', text : 'THOEN' }).addTo(map)
+        var p = L.polyline( [ [ 19.735556 , 100.231389 ], [ 19.735556 , 100.231389 ], [ 19.735556 , 100.231389 ] ], { weight : 0.5, color : '#fe57a1', text : 'THOENG' }).addTo(map)
+        var p = L.polyline( [ [ 8.1300000 , 99.6700000 ], [ 8.1300000 , 99.6700000 ], [ 8.1300000 , 99.6700000 ] ], { weight : 0.5, color : '#fe57a1', text : 'THUNG SONG' }).addTo(map)
+        var p = L.polyline( [ [ 12.279444 , 102.494444 ], [ 12.279444 , 102.494444 ], [ 12.279444 , 102.494444 ] ], { weight : 0.5, color : '#fe57a1', text : 'TRAT' }).addTo(map)
+        var p = L.polyline( [ [ 16.774444 , 102.622222 ], [ 16.774444 , 102.622222 ], [ 16.774444 , 102.622222 ] ], { weight : 0.5, color : '#fe57a1', text : 'UBOLRATANA' }).addTo(map)
+        var p = L.polyline( [ [ 15.275833 , 104.862222 ], [ 15.275833 , 104.862222 ], [ 15.275833 , 104.862222 ] ], { weight : 0.5, color : '#fe57a1', text : 'UBON RATCHATHANI 1' }).addTo(map)
+        var p = L.polyline( [ [ 15.150833 , 104.894444 ], [ 15.150833 , 104.894444 ], [ 15.150833 , 104.894444 ] ], { weight : 0.5, color : '#fe57a1', text : 'UBON RATCHATHANI 2' }).addTo(map)
+        var p = L.polyline( [ [ 17.448056 , 102.793889 ], [ 17.448056 , 102.793889 ], [ 17.448056 , 102.793889 ] ], { weight : 0.5, color : '#fe57a1', text : 'UDON THANI 1' }).addTo(map)
+        var p = L.polyline( [ [ 17.372222 , 102.855278 ], [ 17.372222 , 102.855278 ], [ 17.372222 , 102.855278 ] ], { weight : 0.5, color : '#fe57a1', text : 'UDON THANI 2' }).addTo(map)
+        var p = L.polyline( [ [ 17.607222 , 100.084722 ], [ 17.607222 , 100.084722 ], [ 17.607222 , 100.084722 ] ], { weight : 0.5, color : '#fe57a1', text : 'UTTARADIT' }).addTo(map)
+        var p = L.polyline( [ [ 14.228056 , 100.781944 ], [ 14.228056 , 100.781944 ], [ 14.228056 , 100.781944 ] ], { weight : 0.5, color : '#fe57a1', text : 'WANG NOI' }).addTo(map)
+        var p = L.polyline( [ [ 13.766667 , 102.245278 ], [ 13.766667 , 102.245278 ], [ 13.766667 , 102.245278 ] ], { weight : 0.5, color : '#fe57a1', text : 'WATTHANA NAKHON' }).addTo(map)
+        var p = L.polyline( [ [ 6.4980560 , 101.263889 ], [ 6.4980560 , 101.263889 ], [ 6.4980560 , 101.263889 ] ], { weight : 0.5, color : '#fe57a1', text : 'YALA 1' }).addTo(map)
+        var p = L.polyline( [ [ 6.4750000 , 101.268333 ], [ 6.4750000 , 101.268333 ], [ 6.4750000 , 101.268333 ] ], { weight : 0.5, color : '#fe57a1', text : 'YALA 2' }).addTo(map)
+        var p = L.polyline( [ [ 15.796389 , 104.195278 ], [ 15.796389 , 104.195278 ], [ 15.796389 , 104.195278 ] ], { weight : 0.5, color : '#fe57a1', text : 'YASOTHON' }).addTo(map) 
+        ;
+    
+
+    function setCollisionDetection(flg) {
+        labelTextCollision.options.collisionFlg = flg;
+        map.fitBounds(map.getBounds());
+        }
+
+    L.esri.basemapLayer('DarkGray').addTo(map);
+    Papa.parse('https://gist.githubusercontent.com/hongrell/cdd122e5ff28dfa10698aaed9c244502/raw/9e67f44e2401029269fdb7f0ad298d7523779751/Flowmap_Cities_one_to_many.csv', {
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        var geoJsonFeatureCollection = {
+          type: 'FeatureCollection',
+          features: results.data.map(function(datum) {
+            return {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [datum.s_lon, datum.s_lat]
+              },
+              properties: datum
+            }
+          })
+        };
+        var oneToManyFlowmapLayer = L.canvasFlowmapLayer(geoJsonFeatureCollection, {
+          originAndDestinationFieldIds: {
+            originUniqueIdField: 's_city_id',
+            originGeometry: {
+              x: 's_lon',
+              y: 's_lat'
+            },
+            destinationUniqueIdField: 'e_city_id',
+            destinationGeometry: {
+              x: 'e_lon',
+              y: 'e_lat'
+            }
+          },
+          canvasBezierStyle: {
+            type: 'classBreaks',
+            field: 's_voltage',
+            classBreakInfos: [{
+              classMinValue: 0,
+              classMaxValue: 22,
+              symbol: {
+                strokeStyle: '#6600CC', //Purple
+                lineWidth: 1.5,
+                lineCap: 'round',
+                shadowColor: '#6600CC',
+                shadowBlur: 1.5
+              }
+            }, {
+              classMinValue: 23,
+              classMaxValue: 69,
+              symbol: {
+                strokeStyle: '#ffed51', //Yello
+                lineWidth: 1.5,
+                lineCap: 'round',
+                shadowColor: '#ffed51',
+                shadowBlur: 1.5
+              }
+            }, {
+              classMinValue: 70,
+              classMaxValue: 115,
+              symbol: {
+                strokeStyle: '#FF9900', //Orange
+                lineWidth: 1.5,
+                lineCap: 'round',
+                shadowColor: '#FF9900',
+                shadowBlur: 1.5
+              }
+              }, {
+              classMinValue: 116,
+              classMaxValue: 230,
+              symbol: {
+                strokeStyle: '#ff63c8', //Pink
+                lineWidth: 1.5,
+                lineCap: 'round',
+                shadowColor: '#ff63c8',
+                shadowBlur: 1.5
+              }
+              }, {
+              classMinValue: 231,
+              classMaxValue: 500,
+              symbol: {
+                strokeStyle: '#ff0000', //Red
+                lineWidth: 1.5,
+                lineCap: 'round',
+                shadowColor: '#ff0000',
+                shadowBlur: 1.5
+              }
+            }],
+            // the layer will use the defaultSymbol if a data value doesn't fit
+            // in any of the defined classBreaks
+            defaultSymbol: {
+              strokeStyle: '#e7e1ef',
+              lineWidth: 1.5,
+              lineCap: 'round',
+              shadowColor: '#e7e1ef',
+              shadowBlur: 1.5
+            },
+          },
+        pathDisplayMode: 'selection',
+          animationStarted: true,
+          animationEasingFamily: 'Cubic',
+          animationEasingType: 'In',
+          animationDuration: 2000
+        }).addTo(map);
+
+
+
+        // since this demo is using the optional "pathDisplayMode" as "selection",
+        // it is up to the developer to wire up a click or mouseover listener
+        // and then call the "selectFeaturesForPathDisplay()" method to inform the layer
+        // which Bezier paths need to be drawn
+        oneToManyFlowmapLayer.on('click', function(e) {
+          if (e.sharedOriginFeatures.length) {
+            oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+          }
+          if (e.sharedDestinationFeatures.length) {
+            oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedDestinationFeatures, 'SELECTION_NEW');
+          }
+        });
+               
+      }
+    });
+
+   
+  </script>
+
+</body>
+
+</html>
